@@ -1,0 +1,76 @@
+@charset "utf-8";
+
+* {
+    -webkit-user-select: text !important;
+}
+
+body {
+    background: #ececec;
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+}
+
+.login-view {
+    padding-top: 200px;
+}
+
+.login-header-title {
+    font-size: 40px;
+    font-weight: bold;
+    color: #33b3ed;
+    text-align: center;
+}
+
+.am-tab-bar,
+.am-tab-bar-content,
+.am-tab-bar-tabpane {
+    height: 100%;
+}
+
+.am-tab-bar-bar {
+    z-index: 999;
+}
+
+.am-list {
+    width: 100%;
+}
+
+.am-list .am-list-item .am-input-extra {
+    max-height: 0.5rem !important;
+}
+
+.headerTitle {
+    font-size: .72rem;
+    color: #108ee9;
+    padding: .48rem 0;
+    text-align: center;
+    p {
+        font-size: .28rem;
+        color: #999;
+    }
+}
+
+.home-card-title {
+    .am-list-item {
+        padding-left: 0;
+    }
+    .am-list-item .am-list-line {
+        padding-right: 0;
+    }
+    .am-card-header-content {
+        font-size: .4rem;
+        margin: .1rem 0;
+        font-weight: bold;
+    }
+}
+
+.am-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.app {
+    padding-top: 55px;
+}
