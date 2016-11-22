@@ -4,6 +4,4 @@
 "use strict";
 const baseWebPackConfig = require('./base-config');
 
-module.exports = ()=> {
-    return baseWebPackConfig('mobile');
-};
+module.exports = baseWebPackConfig('desktop');

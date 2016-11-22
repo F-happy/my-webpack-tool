@@ -17,7 +17,7 @@ module.exports = (platform)=> {
 
     baseConfig.output.path = path.resolve(__dirname, `../../build/${platform}`);
 
-    baseConfig.output.filename = '/static/js/[name].[chunkHash:8].js';
+    baseConfig.output.filename = 'static/js/[name].[chunkHash:8].js';
 
     baseConfig.output.chunkFilename = '[name].[chunkHash:8].js';
 
@@ -54,7 +54,7 @@ module.exports = (platform)=> {
     }));
 
     baseConfig.plugins.push(
-        new ExtractTextPlugin('/static/css/style.[hash].css')
+        new ExtractTextPlugin('static/css/style.[hash].css')
     );
 
     baseConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({
