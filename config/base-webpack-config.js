@@ -38,7 +38,7 @@ module.exports = {
             }, {
                 // 图片过滤器会将小于4k的文件直接以data数据的形式写在样式中, 而其他的文件才会正常引入
                 test: /\.(jpg|png)$/,
-                loader: 'url-loader?&name=/static/images/[name].[ext]'
+                loader: 'url-loader?limit=4096&name=/static/images/[name].[ext]'
             }, {
                 test: /\.woff$/,
                 loader: 'file-loader?name=/static/fonts/[name].[ext]'
