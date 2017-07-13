@@ -8,16 +8,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const baseWebPackConfig = require('../base-webpack-config');
 
-module.exports = (platform)=> {
+module.exports = (platform) => {
     let baseConfig = baseWebPackConfig;
 
     baseConfig.entry.main = [path.resolve(__dirname, `../../${platform}/js/index.jsx`)];
 
     baseConfig.entry.vendor = ['react', 'react-dom', 'react-router', 'whatwg-fetch', 'moment', 'rc-form'];
 
-    baseConfig.output.path = path.resolve(__dirname, `../../build/${platform}`);
+    baseConfig.output.path = path.resolve(__dirname, `../../build/${platform}/static/`);
 
-    baseConfig.output.filename = 'static/js/[name].[chunkHash:8].js';
+    baseConfig.output.filename = 'js/[name].[chunkHash:8].js';
 
     baseConfig.output.chunkFilename = '[name].[chunkHash:8].js';
 
@@ -29,7 +29,7 @@ module.exports = (platform)=> {
 
     baseConfig.plugins.push(new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
-        minChunks: function (module, count) {
+        minChunks: (module, count) => {
             return (
                 module.resource &&
                 /\.js$/.test(module.resource) &&
@@ -54,7 +54,7 @@ module.exports = (platform)=> {
     }));
 
     baseConfig.plugins.push(
-        new ExtractTextPlugin('static/css/style.[hash].css')
+        new ExtractTextPlugin('css/style.[hash].css')
     );
 
     baseConfig.plugins.push(new webpack.optimize.UglifyJsPlugin({

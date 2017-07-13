@@ -15,46 +15,58 @@ module.exports = {
         publicPath: ''
     },
     module: {
-        loaders: [
+        rules: [
             {
                 // js过滤器, 将ES6风格的reacts代码编译成正常浏览器识别的ES5代码
                 test: /\.(jsx|js)$/,
-                loader: 'babel-loader',
                 exclude: /node_modules/,
-                query: {
-                    presets: ['es2015', 'react'],
-                    plugins: [['import', [
-                        {"libraryName": "antd", "style": "css"},
-                        {"libraryName": "antd-mobile", "style": "css", "libraryDirectory": "lib"}
-                    ]]]
-                }
+                use: [{
+                    loader: 'babel-loader',
+                    query: {
+                        presets: ['es2015', 'react'],
+                        plugins: [['import', [
+                            {"libraryName": "antd", "style": "css"},
+                            {"libraryName": "antd-mobile", "style": "css", "libraryDirectory": "lib"}
+                        ]]]
+                    }
+                }]
             }, {
                 // SCSS过滤器会将SCSS样式导出为独立的css文件而不是react风格的行内样式
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!sass-loader')
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {plugins: () => [autoprefixer]}
+                        },
+                        'sass-loader']
+                })
             }, {
                 test: /\.css$/,
-                loader: 'style!css!postcss',
+                use: [{loader: 'css-loader'}]
             }, {
                 // 图片过滤器会将小于4k的文件直接以data数据的形式写在样式中, 而其他的文件才会正常引入
                 test: /\.(jpg|png)$/,
-                loader: 'url-loader?limit=4096&name=/static/images/[name].[ext]'
+                use: [{loader: 'url-loader', options: {limit: 4096, name: '/static/images/[name].[ext]'}}]
             }, {
                 test: /\.woff$/,
-                loader: 'file-loader?name=/static/fonts/[name].[ext]'
+                use: [{loader: 'file-loader', options: {name: '/static/fonts/[name].[ext]'}}]
             }
         ]
     },
-    plugins: [
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurrenceOrderPlugin()
-    ],
+    plugins: [],
     resolve: {
-        modulesDirectories: ['node_modules', path.join(__dirname, '../node_modules')],
-        extensions: ['', '.web.tsx', '.web.ts', '.web.jsx', '.web.js', '.ts', '.tsx', '.js', '.jsx', '.json'],
+        modules: ['node_modules', path.join(__dirname, '../node_modules')],
+        extensions: ['.web.tsx', '.web.ts', '.web.jsx', '.web.js', '.ts', '.tsx', '.js', '.jsx'],
     },
     resolveLoader: {
-        modulesDirectories: ['node_modules', path.join(__dirname, '../node_modules')],
-    },
-    postcss: [autoprefixer]
+        modules: ['node_modules', path.join(__dirname, '../node_modules')],
+    }
 };

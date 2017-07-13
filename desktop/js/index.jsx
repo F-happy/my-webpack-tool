@@ -4,19 +4,11 @@
 "use strict";
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, hashHistory, IndexRoute} from 'react-router';
+import TestView from './views/home';
 
-require('../scss/style.scss');
+import '../scss/style.scss';
+// import '../scss/test.css';
 
 import 'whatwg-fetch';
 
-import Home from './views/home';
-
-ReactDOM.render((
-    <Router history={hashHistory}>
-        <Route path="/">
-            <IndexRoute component={Home}/>
-            <Route path="/home" component={Home}/>
-        </Route>
-    </Router>
-), document.getElementById('app'));
+ReactDOM.render((<TestView/>), document.getElementById('app'));

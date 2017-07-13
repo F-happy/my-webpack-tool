@@ -3,6 +3,7 @@
  */
 "use strict";
 import React from 'react';
+import {WhiteSpace} from 'antd-mobile';
 
 export default class Home extends React.Component {
     constructor(props){
@@ -12,6 +13,7 @@ export default class Home extends React.Component {
     render(){
         return (
             <div>
+                <WhiteSpace size="lg" />
                 hello, world!
             </div>
         )
